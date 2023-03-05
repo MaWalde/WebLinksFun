@@ -1,6 +1,9 @@
+using Microsoft.VisualBasic;
 using System;
 using System.Diagnostics;
 using System.Xml.Linq;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace WebLinks
 {
@@ -48,7 +51,7 @@ namespace WebLinks
                 if (command == "quit")
                 {
                     string Ans;
-                    Console.WriteLine("Do you want to save before quiting? Press Y for yes");
+                    Console.WriteLine("Do you want to save before quiting? Type Y for yes");
                     Ans = Console.ReadLine();
                     if (Ans == "Y")
                     {
@@ -83,7 +86,7 @@ namespace WebLinks
                 }
                 else if (command == "search")
                 {
-                    SearchList();
+                   // SearchList();
                 }
                 else
                 {
@@ -185,21 +188,21 @@ namespace WebLinks
             }
         }
 
-       public static void AddLink()
-      {
-          Console.Write("Link name: ");
-          string name = Console.ReadLine();
-          Console.Write("Describe the link: ");
-          string description = Console.ReadLine();
-          Console.Write("Link URL: ");
-          string url = Console.ReadLine();
-          nyheter.Add(new Link(name, description, url));
-       }
-        public static List<>
-    }
-}
+        public static void AddLink()
+        {
 
+            Console.Write("Link name: ");
+            string name = Console.ReadLine();
+            Console.Write("Describe the link: ");
+            string description = Console.ReadLine();
+            Console.Write("Link URL: ");
+            string url = Console.ReadLine();
+            if (nyheter.Exists(namn => namn.Name.Equals(name, StringComparison.OrdinalIgnoreCase)) || nyheter.Exists(web => web.Url.Equals(url, StringComparison.OrdinalIgnoreCase)))
+            {
+                Console.WriteLine($"Oops, sitename or URL is already loaded in the list. \nTry again or type help for help.");
             }
+            else
+                nyheter.Add(new Link(name, description, url));
         }
     }
 }
